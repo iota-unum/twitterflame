@@ -17,6 +17,7 @@
     "puppeteer": "^14.1.1",
     "react": "18.1.0",
     "react-dom": "18.1.0",
+    "react-static-tweets": "^0.7.2",
     "react-twitter-embed": "^4.0.4",
     "request": "^2.88.2",
     "request-promise": "^4.2.6"
