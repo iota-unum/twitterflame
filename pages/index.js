@@ -56,11 +56,15 @@ export async function getStaticProps() {
   const trendsResponse = await fetch('http://localhost:3000/api/trends');
   const trendsJson = await trendsResponse.json();
 
-  const resSearch = await fetch('http://localhost:3000/api/finesearch');
-  const searchJson = await resSearch.json();
+  // const resSearch = await fetch('http://localhost:3000/api/finesearch');
+  // const searchJson = await resSearch.json();
 
-  const tweets = searchJson;
-  const trends = trendsJson;
+  // const tweets = searchJson;
+  // const trends = trendsJson;
+  const tweetsResponse = await fetch('http://localhost:3000/api/all')
+  const tweetsJson = await tweetsResponse.json()
+  const tweets =tweetsJson.results[0].tweets
+  const trends = tweetsJson.results.map(r => `${r.name} - ${r.trendScore}`)
   return {
     props: { tweets, trends },
   };

@@ -6,11 +6,11 @@ export async function getEverything() {
   //get trends
   const trends = await getTrends();
   //get tweets for each trend
-  const tweets = await getAllTweets(trends);
+  const results = await getAllTweets(trends);
   // add score to each trend
   //return everything as an [{name, query, score, tweets}, {name, query, score, tweets}...]
 
-  return { tweets };
+  return { results };
 }
 
 async function getAllTweets(trends) {
