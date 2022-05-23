@@ -12,6 +12,8 @@ import TrendList from '../components/TrendList';
 import Navbar from '../components/Navbar';
 import { useState } from 'react';
 import AppDrawer from '../components/AppDrawer';
+import { getEverything } from '../requests/getEverything'; 
+
 
 export default function Home({ tweets, trends }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
@@ -40,14 +42,16 @@ export default function Home({ tweets, trends }) {
 }
 
 export async function getStaticProps() {
-  const tweetsResponse = await fetch('http://localhost:3000/api/all');
-  const tweets = await tweetsResponse.json();
+  // const tweetsResponse = await fetch('http://localhost:3000/api/all');
+  // const tweets = await tweetsResponse.json();
   // const tweets = tweetsJson.results[0].tweets;
+  const tweets = await getEverything()
   const trends = tweets.results.map((r) => ({
     name: r.name,
     trendScore: r.trendScore,
   }));
   return {
     props: { tweets, trends },
+    revalidate: 10 * 60,
   };
 }
