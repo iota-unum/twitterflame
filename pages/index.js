@@ -1,4 +1,4 @@
-import { Button, Stack } from '@mui/material';
+import { Button, CssBaseline, Stack } from '@mui/material';
 import Head from 'next/head';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -19,10 +19,12 @@ export default function Home({ tweets, trends }) {
   const selectedTweets = tweets.results.filter(trend => trend.name === selectedTrend)[0].tweets
   console.log('SELECTED', selectedTweets)
   return (
-    <div>
+    <CssBaseline>
+
+    <Box width="100vw">
       <Navbar setIsDrawerOpen={setIsDrawerOpen}></Navbar>
-      <Stack direction='row' spacing={10} maxWidth={'60%'} mx='auto'>
-        <TweetLine tweets={selectedTweets} sx={{ backgroundColor: 'teal' }} />
+      <Stack direction='row'  >
+        <TweetLine tweets={selectedTweets}  />
 
         <Sidebar>
           <TrendList trends={trends} setOpen={setIsDrawerOpen} setSelectedTrend={setSelectedTrend} selectedTrend={selectedTrend} />
@@ -31,7 +33,9 @@ export default function Home({ tweets, trends }) {
       <AppDrawer open={isDrawerOpen} setOpen={setIsDrawerOpen}>
         <TrendList trends={trends} setOpen={setIsDrawerOpen} setSelectedTrend={setSelectedTrend} selectedTrend={selectedTrend} />
       </AppDrawer>
-    </div>
+    </Box>
+
+    </CssBaseline>
   );
 }
 

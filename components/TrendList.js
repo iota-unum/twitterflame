@@ -9,7 +9,7 @@ const TrendList = ({trends, setOpen, setSelectedTrend, selectedTrend}) => {
         setSelectedTrend(trend)
     }
   return (
-    <List>
+    <List  >
         {trends.map(trend => 
             
             

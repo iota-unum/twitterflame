@@ -5,8 +5,11 @@ import { TwitterTweetEmbed } from 'react-twitter-embed';
 
 const TweetLine = ({ tweets }) => {
   return (
-    <Box  sx={{backgroundColor:'teal', flex:'3'}} >
-      <Stack width="80%" mx="auto">
+    <Box  sx={{backgroundColor:'teal', flex:'3', 
+    width:'100%'
+    
+    }} >
+      <Stack mx="auto">
 
       {tweets.map((t) => (
         <div key={t.id}>
