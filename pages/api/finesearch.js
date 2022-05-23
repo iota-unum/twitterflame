@@ -3,8 +3,8 @@ import { formatSearchResponse } from "../../libs/utiliities";
 
 
 export default function handler(req, res) {
-    const query= 'duomo'
-    const min_replies = 10
+    const query= '%23scudetto'
+    const min_replies = 5
     var myHeaders = new Headers();
     myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs=1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA");
     myHeaders.append("Cookie", "dnt=1; kdt=23Ef4GVbwx95wf42DUpCuRzSeqkLOxszszMLRONB; d_prefs=MToxLGNvbnNlbnRfdmVyc2lvbjoyLHRleHRfdmVyc2lvbjoxMDAw; guest_id_ads=v1:165311672872291648; guest_id_marketing=v1:165311672872291648; lang=it; auth_multi=\"763485613:8753c415e87c97b15dd26e9444f5eaa3687c8a48\"; auth_token=2b30a0a773767ca1c70b9ae0c16da71a262686e3; personalization_id=\"v1_8T1gc8bSaG9Ro71MHZvrFQ==\"; guest_id=v1:165319981211500629; twid=u=1415383654759636994; ct0=b422e5db1d8643a806af6d409ca8c4b480c7954e9f206244c53ff70383c249c44854ee70c974e822d9a266849d47a0730f2922963e410270637b4e950bd6f35c6e89d89a7a2ee3a6940b95220b231e6b");
