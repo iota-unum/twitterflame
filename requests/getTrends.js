@@ -4,9 +4,9 @@ export function getTrends(){
 
 
     var myHeaders = new Headers();
-    myHeaders.append("Authorization", "Bearer AAAAAAAAAAAAAAAAAAAAANRILgAAAAAAnNwIzUejRCOuH5E6I8xnZz4puTs=1Zv7ttfk8LF81IUq16cHjhLTvJu4FA33AGWWjCpTnA");
-    myHeaders.append("Cookie", "dnt=1; kdt=23Ef4GVbwx95wf42DUpCuRzSeqkLOxszszMLRONB; d_prefs=MToxLGNvbnNlbnRfdmVyc2lvbjoyLHRleHRfdmVyc2lvbjoxMDAw; guest_id_ads=v1:165311672872291648; guest_id_marketing=v1:165311672872291648; lang=it; auth_multi=\"763485613:8753c415e87c97b15dd26e9444f5eaa3687c8a48\"; auth_token=2b30a0a773767ca1c70b9ae0c16da71a262686e3; personalization_id=\"v1_9yaHNUjqIG2b4GBtXyaJ3g==\"; guest_id=v1:165319523807623494; twid=u=1415383654759636994; ct0=ffc6c29b8f72b8462674880a47c7c72c90493e8e73fd1f36ab0f30d36d7c4711cb41a91361b17b7f6710a14e14b0f8d74aee2bf1174f29d82b0efb2b9aefd482c46a63b1d7c838b3ec3f24236e64006a");
-    myHeaders.append("x-csrf-token", "ffc6c29b8f72b8462674880a47c7c72c90493e8e73fd1f36ab0f30d36d7c4711cb41a91361b17b7f6710a14e14b0f8d74aee2bf1174f29d82b0efb2b9aefd482c46a63b1d7c838b3ec3f24236e64006a");
+    myHeaders.append("Authorization", process.env.TRENDS_AUTHORIZATION);
+    myHeaders.append("Cookie", process.env.TRENDS_COOKIE);
+    myHeaders.append("x-csrf-token", process.env.TRENDS_X_CSRF_TOKEN);
     
     var requestOptions = {
       method: 'GET',
