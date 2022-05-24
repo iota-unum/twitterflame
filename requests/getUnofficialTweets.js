@@ -1,5 +1,10 @@
+import { DateTime } from "luxon";
+
+
 export async function getUnofficialTweets(trend) {
-    const date = '2022-05-23'
+    const date = DateTime.now().minus({ days: 1 }).toISODate()
+
+    // const date = '2022-05-23'
   const query = trend;
   const min_replies = 5;
   var myHeaders = new Headers();

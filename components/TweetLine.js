@@ -14,8 +14,8 @@ const TweetLine = ({ tweets }) => {
 
       {tweets.map((t) => (
         <div key={t.id_str}>
-          <TwitterCard tweet={t} />
-          {/* <TwitterTweetEmbed tweetId={t.id_str} options={{ cards: 'hidden' }} /> */}
+          {/* <TwitterCard tweet={t} /> */}
+          <TwitterTweetEmbed tweetId={t.id_str} options={{ cards: 'hidden' }} />
           <p>{t.metrics.favorite_count + ' -  ' + ' R ' + t.metrics.reply_count + ' - Q ' + t.metrics.quote_count}</p>
         </div>
       ))}
