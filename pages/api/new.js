@@ -12,12 +12,12 @@ export default async function handler(req, res) {
 
 
 
-    const unofficialData = await getUnofficialTweets('donnarumma')
+    const unofficialData = await getUnofficialTweets('capezzone')
     const unofficialIdsString = await unofficialData.keys.toString()
     const unofficialTweets = unofficialData.tweets
     const officialTweets = await getOfficialTweets(unofficialIdsString)
     const formattedProva = mergeOfficialAndUnofficialTweets(officialTweets, unofficialTweets)
 
-    const apires = await formattedProva
+    const apires = await officialTweets
     res.status(200).send(apires)
 }
