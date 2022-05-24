@@ -36,3 +36,4 @@ function getTweetsIds(tweets) {
   // const idsString = ids.toString()
   return ids;
 }
+// data.threaded_conversation_with_injections_v2.instructions[0].entries[0].content.itemContent.tweet_results.result.legacy.extended_entities.media[0].video_info.variants[3].url

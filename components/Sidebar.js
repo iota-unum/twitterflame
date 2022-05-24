@@ -4,9 +4,9 @@ import React from 'react'
 const Sidebar = ({children}) => {
   return (
 
-          <Box sx={{flex:'2', }} >
+          <Box sx={{flex:'2', display:{xs:'none', sm:'flex'}}} >
                     <Box sx={{position:'fixed', backgroundColor:'red' , overflowY:'scroll', height:'100%',
-                    display:{xs:'none', sm:'block'},
+                    
                 
                 "&::-webkit-scrollbar": {
                     width: 3,
