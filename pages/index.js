@@ -53,6 +53,6 @@ export async function getStaticProps() {
   }));
   return {
     props: { tweets, trends },
-    revalidate: 10 * 60,
+    revalidate: 15 * 60,
   };
 }

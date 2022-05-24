@@ -8,11 +8,12 @@ export async function getTweetsByQuery(query) {
   const unofficialIdsString = await unofficialData.keys.toString();
   const unofficialTweets = unofficialData.tweets;
   const officialTweets = await getOfficialTweets(unofficialIdsString);
-  const formattedProva = mergeOfficialAndUnofficialTweets(
+  const formattedTweets = mergeOfficialAndUnofficialTweets(
     officialTweets,
     unofficialTweets
   );
-
-  const apires = await formattedProva;
+const sortedTweets = formattedTweets.sort((a, b) => b.tweetScore - a.tweetScore);
+  const apires = await sortedTweets;
   return apires;
 }
+
