@@ -13,6 +13,7 @@ import Navbar from '../components/Navbar';
 import { useState } from 'react';
 import AppDrawer from '../components/AppDrawer';
 import { getEverything } from '../requests/getEverything'; 
+import { getAll } from '../requests/getAll';
 
 
 export default function Home({ tweets, trends }) {
@@ -45,7 +46,7 @@ export async function getStaticProps() {
   // const tweetsResponse = await fetch('http://localhost:3000/api/all');
   // const tweets = await tweetsResponse.json();
   // const tweets = tweetsJson.results[0].tweets;
-  const tweets = await getEverything()
+  const tweets = await getAll()
   const trends = tweets.results.map((r) => ({
     name: r.name,
     trendScore: r.trendScore,

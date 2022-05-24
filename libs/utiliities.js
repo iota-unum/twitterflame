@@ -56,6 +56,14 @@ return tweetsArr
 
 
 }
+
+
+
+export function getIdsStringFromTweetsArray(tweets){
+
+
+ return tweets.map(t => t.id).toString()
+}
 // export function extractTrends(response){
 
 // return response.timeline.instructions[1].addEntries.entries[1].content.timelineModule.items

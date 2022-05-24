@@ -17,7 +17,9 @@ async function getAllTweets(trends) {
   const promises = await trends.map(async (trend) => {
     const tweets = await getTweets(trend.query);
     const trendScore = rankTweets(tweets);
-    return { name:trend.name, trendScore, tweets, query: trend.query};
+    return { name: trend.name, trendScore, tweets, query: trend.query };
   });
-  return (await Promise.all(promises)).sort((a,b) => b.trendScore - a.trendScore);
+  return (await Promise.all(promises)).sort(
+    (a, b) => b.trendScore - a.trendScore
+  );
 }
