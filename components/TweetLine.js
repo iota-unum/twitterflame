@@ -6,7 +6,9 @@ import TwitterCard from './TwitterCard';
 
 const TweetLine = ({ tweets }) => {
   return (
-    <Box  sx={{backgroundColor:'teal', flex:"4", width: '100%'
+    <Box   sx={{
+      backgroundColor:'lightgrey',
+       flex:"4", width: '100%'
     
     }} >
       <Stack mx="auto">

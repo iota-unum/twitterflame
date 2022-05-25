@@ -4,7 +4,7 @@ import WhatshotIcon from '@mui/icons-material/Whatshot';
 import Image from 'next/image';
 const Navbar = ({setIsDrawerOpen}) => {
   return (
-   <AppBar position='sticky' width='100%'>
+   <AppBar position='sticky' width='100%' color="secondary">
 
        <Toolbar sx={{display:'flex', justifyContent:'space-between'}}>
            <p>twitterflame</p>

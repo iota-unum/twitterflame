@@ -10,7 +10,7 @@ import TweetLine from '../components/TweetLine';
 import Sidebar from '../components/Sidebar';
 import TrendList from '../components/TrendList';
 import Navbar from '../components/Navbar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import AppDrawer from '../components/AppDrawer';
 import { getEverything } from '../requests/getEverything'; 
 import { getAll } from '../requests/getAll';
@@ -21,6 +21,14 @@ export default function Home({ tweets, trends }) {
   const [selectedTrend, setSelectedTrend] = useState(tweets.results[0].name)
   const selectedTweets = tweets.results.filter(trend => trend.name === selectedTrend)[0].tweets
   console.log('SELECTED', selectedTweets)
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  
+  
+  }, [selectedTrend])
+  
   return (
     <CssBaseline>
 
