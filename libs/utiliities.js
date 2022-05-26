@@ -4,12 +4,12 @@ export function formatTrendResponse(response) {
   return response.timeline.instructions[1].addEntries.entries[1].content.timelineModule.items.map(
     (item) => {
       const trend = item.item.content.trend;
-      const { name, url } = trend;
+      const {  url } = trend;
 
       const fullUrl = url.url;
       const query = fullUrl.match(/query=(.*?)&/i)[1];
       return {
-        name,
+        ...trend,
         query,
       };
     }

@@ -10,18 +10,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 // import format from 'date-fns/format'
 
 const TwitterCard = ({ tweet }) => {
-  //   const tweet = {
-  //     avatar:
-  //       'https://pbs.twimg.com/profile_images/1385713775974756352/vAXmdZtH_400x400.jpg',
-  //     nickname: 'nonexpedit',
-  //     handle: '@nonexpedit',
-  //     status:`Antico proverbio cinese:
-  //     "Se regali un pesce a un uomo, paghi solo l'iva agevolata al 10%. Se invece gli insegni a pescare, lui dovrà versare l'acconto irpef per l'anno successivo."`,
-  //     image: 'https://pbs.twimg.com/media/FPkvhkMXoAI8Dhs?format=jpg&name=small',
-  //     created_at:"Tue Feb 27 21:11:40 +0000 2018",
-  //     user: '',
-  //   };
-  // const {created_at, id_str, text, user:{name, screen_name, profile_image_url}} = tweet
+
   const {
     created_at,
     id_str,
@@ -73,6 +62,7 @@ const TwitterCard = ({ tweet }) => {
 tweetImage &&  <Image width={imgWidth}  height={imgHeight} src={tweetImage} />
 
         }
+        {/* <img src={tweetImage} alt="" /> */}
       </div>
 
       <div className='card-footer'>
