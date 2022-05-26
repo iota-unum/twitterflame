@@ -93,6 +93,7 @@ const TwitterCard = ({ tweet }) => {
             color: black;
             font-family: Arial, Helvetica, sans-serif;
             text-align: left;
+            font-size: 1rem;
           }
 
           .card-header {
@@ -115,7 +116,7 @@ const TwitterCard = ({ tweet }) => {
           }
           .name {
             padding-left: 0.5em;
-            line-height: 1.2em;
+            line-height: 0.3em;
           }
           .nickname {
             font-weight: bolder;
@@ -131,6 +132,7 @@ const TwitterCard = ({ tweet }) => {
             padding-top: 1em;
             line-height: 1.1em;
             opacity: 0.9;
+            line-height: 1.3;
           }
           .card-image {
             width: ;
