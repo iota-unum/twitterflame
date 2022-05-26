@@ -1,5 +1,9 @@
 import React from 'react';
 import { formatDate } from '../libs/utiliities';
+import  Link  from 'next/link';
+import TwitterIcon from '@mui/icons-material/Twitter';
+import { Button } from '@mui/material';
+import { Box } from '@mui/system';
 // import { BsTwitter } from 'react-icons/bs';
 // import format from 'date-fns/format'
 
@@ -19,13 +23,14 @@ const TwitterCard = ({tweet}) => {
 const {created_at, id_str, full_text:text, name, screen_name, profile_image_url_https:profile_image_url} = tweet
 const status = text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
 const tweetImage = tweet.extended_entities?.media[0].media_url_https
+const tweetUrl = `https://twitter.com/${screen_name}/status/${tweet.id_str}`;
 //   console.log(id_str, screen_name)
 console.log(formatDate(created_at))
   return (
+    
     <div className='twitter-card'>
       <div className='card-header'>
           <div className="header-left">
-
         <div className='avatar'>
 
             <img src={profile_image_url} alt="" />
@@ -38,6 +43,14 @@ console.log(formatDate(created_at))
           </div>
           <div className="header-right">
               {/* <BsTwitter size={'1.65em'} color={'var(--selectedColor'}/> */}
+
+      <Link href={tweetUrl}>
+  <Button variant='text' endIcon={<TwitterIcon/>}  size='small'>
+      see on  {/* <a target="_blank">see on</a> */}
+  </Button>
+      </Link>
+
+
           </div>
       </div>
 
@@ -125,6 +138,9 @@ console.log(formatDate(created_at))
         `}
       </style>
     </div>
+    
+    
+    
   );
 };
 

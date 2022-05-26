@@ -18,6 +18,6 @@ export default async function handler(req, res) {
     const officialTweets = await getOfficialTweets(unofficialIdsString)
     const formattedProva = mergeOfficialAndUnofficialTweets(officialTweets, unofficialTweets)
 
-    const apires = await formattedProva
+    const apires = await officialTweets
     res.status(200).send(apires)
 }
