@@ -31,7 +31,7 @@ export default function Home({ tweets, trends }) {
     <CssBaseline>
       <Box width='100vw'>
         <Navbar setIsDrawerOpen={setIsDrawerOpen}></Navbar>
-        <Stack direction='row'>
+        <Stack direction='row' sx={{width:{xs:'100%', sm:'50%', margin:'0 auto'}}} >
           <TweetLine tweets={selectedTweets} />
 
           <Sidebar>

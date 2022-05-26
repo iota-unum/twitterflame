@@ -8,10 +8,10 @@ const TweetLine = ({ tweets }) => {
   return (
     <Box   sx={{
       backgroundColor:'lightgrey',
-       flex:"4", width: '100%'
+       flex:"4", width: '50%'
     
     }} >
-      <Stack mx="auto">
+      <Stack mx="auto" sx={{margin: '0 auto', width:'100%'}}  >
 
       {tweets.map((t) => (
         <div key={t.id_str}>

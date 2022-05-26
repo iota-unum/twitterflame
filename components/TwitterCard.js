@@ -1,4 +1,5 @@
 import React from 'react';
+import { formatDate } from '../libs/utiliities';
 // import { BsTwitter } from 'react-icons/bs';
 // import format from 'date-fns/format'
 
@@ -19,6 +20,7 @@ const {created_at, id_str, full_text:text, name, screen_name, profile_image_url_
 const status = text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
 const tweetImage = tweet.extended_entities?.media[0].media_url_https
 //   console.log(id_str, screen_name)
+console.log(formatDate(created_at))
   return (
     <div className='twitter-card'>
       <div className='card-header'>
@@ -46,9 +48,8 @@ const tweetImage = tweet.extended_entities?.media[0].media_url_https
 
       <div className='card-footer'>
           <div className="date">
-
       {/* {format(new Date(created_at), 'h:mm a - MMM d, y')} */}
-
+{formatDate(created_at)}
           </div>
 
       </div>

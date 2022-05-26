@@ -1,3 +1,5 @@
+import { DateTime } from 'luxon';
+
 export function formatTrendResponse(response) {
   return response.timeline.instructions[1].addEntries.entries[1].content.timelineModule.items.map(
     (item) => {
@@ -30,39 +32,19 @@ export function formatSearchResponse(response) {
       };
     })
     .sort((a, b) => b.tweetScore - a.tweetScore);
-  
+
   return tweets;
 }
 
-
-
-
-
-export function rankTweets(tweetsArr){
-
-return tweetsArr
-
-.map(t => t.tweetScore)
-.reduce((a,b) => (a+b), 0)
-
-
+export function rankTweets(tweetsArr) {
+  return tweetsArr.map((t) => t.tweetScore).reduce((a, b) => a + b, 0);
 }
-export function rankTrends(tweetsArr){
-
-return tweetsArr
-
-.map(t => t.trendScore)
-.reduce((a,b) => (a+b), 0)
-
-
+export function rankTrends(tweetsArr) {
+  return tweetsArr.map((t) => t.trendScore).reduce((a, b) => a + b, 0);
 }
 
-
-
-export function getIdsStringFromTweetsArray(tweets){
-
-
- return tweets.map(t => t.id).toString()
+export function getIdsStringFromTweetsArray(tweets) {
+  return tweets.map((t) => t.id).toString();
 }
 // export function extractTrends(response){
 
@@ -73,3 +55,16 @@ export function getIdsStringFromTweetsArray(tweets){
 // }
 
 // fullUrl.match(/URL=(.*?)&/i)[1];
+
+export function formatDate(date) {
+  const TWITTER_DATE_FORMAT = 'EEE MMM d HH:mm:ss ZZZ yyyy';
+
+  const parseTwitterDate = (dateStr) =>
+    DateTime.fromFormat(dateStr, TWITTER_DATE_FORMAT);
+
+  const formatTwitterDate = (dateTime) =>
+    dateTime.toFormat(TWITTER_DATE_FORMAT);
+
+return  parseTwitterDate(date).toFormat('hh:mm a dd LLL yyyy', {locale:'it'});
+ 
+}
