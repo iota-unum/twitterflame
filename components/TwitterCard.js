@@ -3,6 +3,7 @@ import { formatDate } from '../libs/utiliities';
 import Link from 'next/link';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, Stack } from '@mui/material';
+import Image from 'next/image'
 import { Box } from '@mui/system';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 // import { BsTwitter } from 'react-icons/bs';
@@ -31,6 +32,8 @@ const TwitterCard = ({ tweet }) => {
   } = tweet;
   const status = text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
   const tweetImage = tweet.extended_entities?.media[0].media_url_https;
+  const imgWidth = tweet.extended_entities?.media[0].sizes.small.w
+  const imgHeight = tweet.extended_entities?.media[0].sizes.small.h
   const tweetUrl = `https://twitter.com/${screen_name}/status/${tweet.id_str}`;
   //   console.log(id_str, screen_name)
   console.log(formatDate(created_at));
@@ -63,8 +66,13 @@ const TwitterCard = ({ tweet }) => {
       </div>
 
       <div className='card-text'> {status} </div>
-      <div className='card-image'>
-        <img src={tweetImage} />
+     
+      <div className='card-image'  >
+        {
+
+tweetImage &&  <Image width={imgWidth}  height={imgHeight} src={tweetImage} />
+
+        }
       </div>
 
       <div className='card-footer'>
@@ -94,6 +102,7 @@ const TwitterCard = ({ tweet }) => {
             font-family: Arial, Helvetica, sans-serif;
             text-align: left;
             font-size: 1rem;
+            width:100%;
           }
 
           .card-header {
@@ -101,7 +110,7 @@ const TwitterCard = ({ tweet }) => {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
-            font-size: 0.9rem;
+            font-size: 0.8rem;
           }
 
           .header-left {
@@ -136,7 +145,7 @@ const TwitterCard = ({ tweet }) => {
             line-height: 1.3;
           }
           .card-image {
-            width: ;
+            width: 200px;
             border-radius: 0.8em;
             overflow: hidden;
             margin: 1em auto;

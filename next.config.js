@@ -4,3 +4,8 @@ const nextConfig = {
 }
 
 module.exports = nextConfig
+module.exports = {
+  images: {
+    domains: ['pbs.twimg.com', 'example2.com'],
+  },
+}
