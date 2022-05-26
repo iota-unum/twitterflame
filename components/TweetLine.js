@@ -11,13 +11,13 @@ const TweetLine = ({ tweets }) => {
        flex:"4", width: '50%'
     
     }} >
-      <Stack mx="auto" sx={{margin: '0 auto', width:'100%'}}  >
+      <Stack mx="auto" sx={{margin: '0 auto', width:'100%'}} spacing={3}  >
 
       {tweets.map((t) => (
         <div key={t.id_str}>
           <TwitterCard tweet={t} />
           {/* <TwitterTweetEmbed tweetId={t.id_str} options={{ cards: 'hidden' }} /> */}
-          <p>{t.metrics.favorite_count + ' -  ' + ' R ' + t.metrics.reply_count + ' - Q ' + t.metrics.quote_count}</p>
+          {/* <p>{t.metrics.favorite_count + ' -  ' + ' R ' + t.metrics.reply_count + ' - Q ' + t.metrics.quote_count}</p> */}
         </div>
       ))}
 
