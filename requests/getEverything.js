@@ -13,7 +13,7 @@ export async function getEverything() {
   return { results };
 }
 
-async function getAllTweets(trends) {
+ async function getAllTweets(trends) {
   const promises = await trends.map(async (trend) => {
     const tweets = await getTweets(trend.query);
     const trendScore = rankTweets(tweets);
