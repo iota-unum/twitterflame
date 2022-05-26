@@ -12,7 +12,7 @@ export default async function handler(req, res) {
 
 
 
-    const unofficialData = await getUnofficialTweets('battiato')
+    const unofficialData = await getUnofficialTweets('battiatoge')
     const unofficialIdsString = await unofficialData.keys.toString()
     const unofficialTweets = unofficialData.tweets
     const officialTweets = await getOfficialTweets(unofficialIdsString)
