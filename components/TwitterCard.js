@@ -101,6 +101,7 @@ const TwitterCard = ({ tweet }) => {
             display: flex;
             justify-content: space-between;
             align-items: flex-start;
+            font-size: 0.9rem;
           }
 
           .header-left {
