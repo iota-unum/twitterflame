@@ -6,7 +6,7 @@ export async function getUnofficialTweets(trend) {
 
     // const date = '2022-05-23'
   const query = trend;
-  const min_replies = 50;
+  const min_replies = 5;
   var myHeaders = new Headers();
   myHeaders.append('Authorization', process.env.TWEETS_AUTHORIZATION);
   myHeaders.append('Cookie', process.env.TWEETS_COOKIE);
