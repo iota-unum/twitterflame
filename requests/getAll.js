@@ -16,7 +16,9 @@ export async function getAll() {
   
   async function getAllTweets(trends) {
     const promises = await trends.map(async (trend) => {
-      const tweets = await getTweetsByQuery(trend.query);
+      const rawtweets = await getTweetsByQuery(trend.query);
+      const tweets =  rawtweets.map(t =>({...t, query:trend.query}))
+      console.log('TWWEEETS', tweets)
       const trendScore = rankTweets(tweets);
       return { name: trend.name, trendScore, tweets, query: trend.query };
     });

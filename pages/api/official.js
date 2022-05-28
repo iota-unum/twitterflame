@@ -4,7 +4,7 @@ import { getTweets } from "../../requests/getTweets"
 
 export default async function handler(req, res) {
 
-    const unofficialTweets = await getTweets('valentina')
+    const unofficialTweets = await getTweets('alessandro')
     const idsStr = getIdsStringFromTweetsArray(unofficialTweets)
     const  officialTweets= await getOfficialTweets(idsStr)
     const idstr2 = officialTweets.map(off => off.id_str).toString()
