@@ -1,11 +1,12 @@
 import { List, ListItem, ListItemButton, ListItemText } from '@mui/material'
 import React from 'react'
 
-const TrendList = ({trends, setOpen, setSelectedTrend, selectedTrend}) => {
+const TrendList = ({trends, setOpen, setSelectedTrend, selectedTrend, setTrendMode}) => {
 
     // console.log('TRENDS from trendlist', trends)
     function handleClick(trend){
         setOpen(false)
+        setTrendMode(true)
         setSelectedTrend(trend)
     }
   return (

@@ -45,25 +45,24 @@ export default function Home({ tweets, trends }) {
           <TweetLine tweets={displayedTweets} trendMode={trendMode} setTrendMode={setTrendMode} setSelectedTrend={setSelectedTrend} />
 
           <Sidebar>
-            {trendMode && (
               <TrendList
                 trends={trends}
                 setOpen={setIsDrawerOpen}
                 setSelectedTrend={setSelectedTrend}
                 selectedTrend={selectedTrend}
+                setTrendMode={setTrendMode}
               />
-            )}
           </Sidebar>
         </Stack>
         <AppDrawer open={isDrawerOpen} setOpen={setIsDrawerOpen}>
-          {trendMode && (
             <TrendList
               trends={trends}
               setOpen={setIsDrawerOpen}
               setSelectedTrend={setSelectedTrend}
               selectedTrend={selectedTrend}
+              setTrendMode={setTrendMode}
+
             />
-          )}
         </AppDrawer>
       </Box>
     </CssBaseline>
