@@ -4,7 +4,7 @@ import React from 'react';
 import { TwitterTweetEmbed } from 'react-twitter-embed';
 import TwitterCard from './TwitterCard';
 
-const TweetLine = ({ tweets }) => {
+const TweetLine = ({ tweets, trendMode, setTrendMode, setSelectedTrend }) => {
   return (
     <Box   sx={{
       backgroundColor:'lightgrey',
@@ -15,13 +15,17 @@ const TweetLine = ({ tweets }) => {
 
       {tweets.map((t) => (
         <div key={t.id_str}>
-          <TwitterCard tweet={t} />
+          <TwitterCard tweet={t} trendMode={trendMode} setTrendMode={setTrendMode} setSelectedTrend={setSelectedTrend} />
           {/* <TwitterTweetEmbed tweetId={t.id_str} options={{ cards: 'hidden' }} /> */}
           {/* <p>{t.metrics.favorite_count + ' -  ' + ' R ' + t.metrics.reply_count + ' - Q ' + t.metrics.quote_count}</p> */}
+    
+      
+       
         </div>
       ))}
 
       </Stack>
+
     </Box>
   );
 };

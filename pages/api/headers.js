@@ -10,7 +10,7 @@ export default function handler(req, res) {
 
   rp(options)
     .then(function (response) {
-      console.log('DELETE succeeded with status %d', response);
+      // console.log('DELETE succeeded with status %d', response);
       res.send('ciao');
     })
     .catch(function (err) {

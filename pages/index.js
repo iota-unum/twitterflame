@@ -19,40 +19,51 @@ import { getMostDiscussedTweets } from '../requests/getMostDiscussedTweets';
 export default function Home({ tweets, trends }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedTrend, setSelectedTrend] = useState(tweets.results[0].name);
-  const [trendMode, setTrendMode] = useState(true)
-  const mostDiscussedTweets = getMostDiscussedTweets(tweets.results)
-  const selectedTweets = tweets.results.filter(
+  const [trendMode, setTrendMode] = useState(true);
+  const mostDiscussedTweets = getMostDiscussedTweets(JSON.parse(JSON.stringify(tweets.results)));
+  const selectedTweets = JSON.parse(JSON.stringify(tweets)).results.filter(
     (trend) => trend.name === selectedTrend
   )[0].tweets;
-  console.log('SELECTED', selectedTweets);
-const displayedTweets = trendMode ? selectedTweets : mostDiscussedTweets
+  // console.log('SELECTED', selectedTweets);
+  const displayedTweets = trendMode ? selectedTweets : mostDiscussedTweets;
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [selectedTrend]);
+  }, [selectedTrend, trendMode]);
 
   return (
     <CssBaseline>
       <Box width='100vw'>
-        <Navbar setIsDrawerOpen={setIsDrawerOpen}></Navbar>
-        <Stack direction='row' sx={{width:{xs:'100%', sm:'45%', margin:'0 auto'}}} >
-          <TweetLine tweets={displayedTweets} />
+        <Navbar
+          setIsDrawerOpen={setIsDrawerOpen}
+          trendMode={trendMode}
+          setTrendMode={setTrendMode}
+        ></Navbar>
+        <Stack
+          direction='row'
+          sx={{ width: { xs: '100%', sm: '45%', margin: '0 auto' } }}
+        >
+          <TweetLine tweets={displayedTweets} trendMode={trendMode} setTrendMode={setTrendMode} setSelectedTrend={setSelectedTrend} />
 
           <Sidebar>
+            {trendMode && (
+              <TrendList
+                trends={trends}
+                setOpen={setIsDrawerOpen}
+                setSelectedTrend={setSelectedTrend}
+                selectedTrend={selectedTrend}
+              />
+            )}
+          </Sidebar>
+        </Stack>
+        <AppDrawer open={isDrawerOpen} setOpen={setIsDrawerOpen}>
+          {trendMode && (
             <TrendList
               trends={trends}
               setOpen={setIsDrawerOpen}
               setSelectedTrend={setSelectedTrend}
               selectedTrend={selectedTrend}
             />
-          </Sidebar>
-        </Stack>
-        <AppDrawer open={isDrawerOpen} setOpen={setIsDrawerOpen}>
-          <TrendList
-            trends={trends}
-            setOpen={setIsDrawerOpen}
-            setSelectedTrend={setSelectedTrend}
-            selectedTrend={selectedTrend}
-          />
+          )}
         </AppDrawer>
       </Box>
     </CssBaseline>
@@ -64,12 +75,13 @@ export async function getStaticProps() {
   // const tweets = await tweetsResponse.json();
   // const tweets = tweetsJson.results[0].tweets;
   const tweets = await getAll();
+  
   const trends = tweets.results.map((r) => ({
     name: r.name,
     trendScore: r.trendScore,
   }));
   return {
-    props: { tweets, trends },
+    props: { tweets:JSON.parse(JSON.stringify(tweets)), trends },
     revalidate: 15 * 60,
   };
 }

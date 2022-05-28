@@ -9,7 +9,7 @@ import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 // import { BsTwitter } from 'react-icons/bs';
 // import format from 'date-fns/format'
 
-const TwitterCard = ({ tweet }) => {
+const TwitterCard = ({ tweet, trendMode, setTrendMode, setSelectedTrend }) => {
 
   const {
     created_at,
@@ -26,7 +26,13 @@ const TwitterCard = ({ tweet }) => {
   const imgHeight = tweet.extended_entities?.media[0].sizes.small.h
   const tweetUrl = `https://twitter.com/${screen_name}/status/${tweet.id_str}`;
   //   console.log(id_str, screen_name)
-  console.log(formatDate(created_at));
+  // console.log(formatDate(created_at));
+  function handleClick(){
+
+    setTrendMode(true)
+    setSelectedTrend(tweet.query.name)
+
+  }
   return (
     <div className='twitter-card'>
       <div className='card-header'>
@@ -76,6 +82,7 @@ tweetImage &&  <Image width={imgWidth}  height={imgHeight} src={tweetImage} />
           </Stack>
 
         </Stack>
+        {!trendMode && <Button onClick={handleClick} > {tweet.query.name}</Button>}
       </div>
       <style jsx>
         {`

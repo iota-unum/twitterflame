@@ -3,7 +3,7 @@ import React from 'react'
 
 const TrendList = ({trends, setOpen, setSelectedTrend, selectedTrend}) => {
 
-    console.log('TRENDS from trendlist', trends)
+    // console.log('TRENDS from trendlist', trends)
     function handleClick(trend){
         setOpen(false)
         setSelectedTrend(trend)

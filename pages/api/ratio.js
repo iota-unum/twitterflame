@@ -23,7 +23,7 @@ const wholeResponse = await  (await getAll()).results
 //     .sort((a,b)=> b.ratio - a.ratio)
 const selected = await getMostDiscussedTweets(wholeResponse)
 
-    res.json(selected)
+    res.json({response: wholeResponse})
 }
 
 
