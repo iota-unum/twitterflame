@@ -82,7 +82,15 @@ tweetImage &&  <Image width={imgWidth}  height={imgHeight} src={tweetImage} />
           </Stack>
 
         </Stack>
-        {!trendMode && <Button onClick={handleClick} > {tweet.query.name}</Button>}
+        {!trendMode && 
+        <Box p={2}>
+
+        <small  >
+View more on this trend  <Button variant="outlined"size='small' onClick={handleClick} > {tweet.query.name}</Button>
+        </small>
+
+        </Box>
+}
       </div>
       <style jsx>
         {`
