@@ -19,7 +19,7 @@ import { getMostDiscussedTweets } from '../requests/getMostDiscussedTweets';
 export default function Home({ tweets, trends }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedTrend, setSelectedTrend] = useState(tweets.results[0].name);
-  const [trendMode, setTrendMode] = useState(true);
+  const [trendMode, setTrendMode] = useState(false);
   const mostDiscussedTweets = getMostDiscussedTweets(JSON.parse(JSON.stringify(tweets.results)));
   const selectedTweets = JSON.parse(JSON.stringify(tweets)).results.filter(
     (trend) => trend.name === selectedTrend
