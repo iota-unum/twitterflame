@@ -14,15 +14,18 @@ import { useEffect, useState } from 'react';
 import AppDrawer from '../components/AppDrawer';
 import { getEverything } from '../requests/getEverything';
 import { getAll } from '../requests/getAll';
+import { getMostDiscussedTweets } from '../requests/getMostDiscussedTweets';
 
 export default function Home({ tweets, trends }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedTrend, setSelectedTrend] = useState(tweets.results[0].name);
+  const [trendMode, setTrendMode] = useState(true)
+  const mostDiscussedTweets = getMostDiscussedTweets(tweets.results)
   const selectedTweets = tweets.results.filter(
     (trend) => trend.name === selectedTrend
   )[0].tweets;
   console.log('SELECTED', selectedTweets);
-
+const displayedTweets = trendMode ? selectedTweets : mostDiscussedTweets
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [selectedTrend]);
@@ -32,7 +35,7 @@ export default function Home({ tweets, trends }) {
       <Box width='100vw'>
         <Navbar setIsDrawerOpen={setIsDrawerOpen}></Navbar>
         <Stack direction='row' sx={{width:{xs:'100%', sm:'45%', margin:'0 auto'}}} >
-          <TweetLine tweets={selectedTweets} />
+          <TweetLine tweets={displayedTweets} />
 
           <Sidebar>
             <TrendList

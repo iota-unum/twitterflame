@@ -19,6 +19,7 @@ const TwitterCard = ({ tweet }) => {
     screen_name,
     profile_image_url_https: profile_image_url,
   } = tweet;
+  const ratio = (tweet.metrics.reply_count + tweet.metrics.quote_count) / tweet.metrics.favorite_count
   const status = text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
   const tweetImage = tweet.extended_entities?.media[0].media_url_https;
   const imgWidth = tweet.extended_entities?.media[0].sizes.small.w
@@ -79,6 +80,7 @@ tweetImage &&  <Image width={imgWidth}  height={imgHeight} src={tweetImage} />
       <style jsx>
         {`
           .twitter-card {
+            border: ${ratio > 1 && `5px solid purple`};
             border-radius: 0.8em;
             width: 95%;
             display: flex;
@@ -93,6 +95,7 @@ tweetImage &&  <Image width={imgWidth}  height={imgHeight} src={tweetImage} />
             text-align: left;
             font-size: 1rem;
             width:100%;
+
           }
 
           .card-header {

@@ -1,4 +1,4 @@
-export async function getMostDiscussedTweets(tweets){
+export function getMostDiscussedTweets(tweets){
 
     return  tweets.map(trend => 
           trend.tweets.filter(t => {
