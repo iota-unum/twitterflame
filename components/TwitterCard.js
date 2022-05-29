@@ -86,7 +86,7 @@ tweetImage &&  <Image width={imgWidth}  height={imgHeight} src={tweetImage} />
         <Box p={2}>
 
         <small style={{color:'blueviolet'}} >
-View more on this trend  <Button variant="outlined"size='small' onClick={handleClick} > {tweet.query.name}</Button>
+More on this trend... <Button variant="outlined"size='small' onClick={handleClick} > {tweet.query.name}</Button>
         </small>
 
         </Box>
