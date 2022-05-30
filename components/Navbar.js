@@ -5,7 +5,7 @@ import Image from 'next/image';
 const Navbar = ({ setIsDrawerOpen, trendMode, setTrendMode }) => {
   console.log('TRENDMODE', trendMode);
   return (
-    <AppBar position='sticky' width='100%' color='secondary'>
+    <AppBar position='sticky' width='100%' color='primary'>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
         <p>twitterflame</p>
         {/* <p style={{borderBottom:trendMode && '2px solid white'}} >tweets</p>
