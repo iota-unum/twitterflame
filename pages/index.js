@@ -15,54 +15,63 @@ import AppDrawer from '../components/AppDrawer';
 import { getEverything } from '../requests/getEverything';
 import { getAll } from '../requests/getAll';
 import { getMostDiscussedTweets } from '../requests/getMostDiscussedTweets';
+import { getRatioed } from '../requests/getRatioedCollection';
 
-export default function Home({ tweets, trends }) {
+export default function Home({
+  tweets,
+  trends,
+  mostDiscussedTweets,
+  ratioedTweets,
+}) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [selectedTrend, setSelectedTrend] = useState(tweets.results[0].name);
-  const [trendMode, setTrendMode] = useState(false);
-  const mostDiscussedTweets = getMostDiscussedTweets(JSON.parse(JSON.stringify(tweets.results)));
-  const selectedTweets = JSON.parse(JSON.stringify(tweets)).results.filter(
+  const [selectedTrend, setSelectedTrend] = useState(tweets[0].name);
+  const [displayMode, setDisplayMode] = useState('ratioed');
+  const selectedTweets = tweets.filter(
     (trend) => trend.name === selectedTrend
   )[0].tweets;
   // console.log('SELECTED', selectedTweets);
-  const displayedTweets = trendMode ? selectedTweets : mostDiscussedTweets;
+  const displayedTweets = displayMode === 'mostDiscussed' ? selectedTweets : displayMode === 'trends' ? selectedTweets : ratioedTweets;
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [selectedTrend, trendMode]);
+  }, [selectedTrend, displayMode]);
 
   return (
     <CssBaseline>
       <Box width='100vw'>
         <Navbar
           setIsDrawerOpen={setIsDrawerOpen}
-          trendMode={trendMode}
-          setTrendMode={setTrendMode}
+          displayMode={displayMode}
+          setDisplayMode={setDisplayMode}
         ></Navbar>
         <Stack
           direction='row'
           sx={{ width: { xs: '100%', sm: '45%', margin: '0 auto' } }}
         >
-          <TweetLine tweets={displayedTweets} trendMode={trendMode} setTrendMode={setTrendMode} setSelectedTrend={setSelectedTrend} />
+          <TweetLine
+            tweets={displayedTweets}
+            displayMode={displayMode}
+            setDisplayMode={setDisplayMode}
+            setSelectedTrend={setSelectedTrend}
+          />
 
           <Sidebar>
-              <TrendList
-                trends={trends}
-                setOpen={setIsDrawerOpen}
-                setSelectedTrend={setSelectedTrend}
-                selectedTrend={selectedTrend}
-                setTrendMode={setTrendMode}
-              />
-          </Sidebar>
-        </Stack>
-        <AppDrawer open={isDrawerOpen} setOpen={setIsDrawerOpen}>
             <TrendList
               trends={trends}
               setOpen={setIsDrawerOpen}
               setSelectedTrend={setSelectedTrend}
               selectedTrend={selectedTrend}
-              setTrendMode={setTrendMode}
-
+              setDisplayMode={setDisplayMode}
             />
+          </Sidebar>
+        </Stack>
+        <AppDrawer open={isDrawerOpen} setOpen={setIsDrawerOpen}>
+          <TrendList
+            trends={trends}
+            setOpen={setIsDrawerOpen}
+            setSelectedTrend={setSelectedTrend}
+            selectedTrend={selectedTrend}
+            setDisplayMode={setDisplayMode}
+          />
         </AppDrawer>
       </Box>
     </CssBaseline>
@@ -70,17 +79,23 @@ export default function Home({ tweets, trends }) {
 }
 
 export async function getStaticProps() {
-  // const tweetsResponse = await fetch('http://localhost:3000/api/all');
-  // const tweets = await tweetsResponse.json();
-  // const tweets = tweetsJson.results[0].tweets;
-  const tweets = await getAll();
-  
-  const trends = tweets.results.map((r) => ({
+  const tweets = await (await getAll()).results;
+  const mostDiscussedTweets = await getMostDiscussedTweets(tweets);
+  const ratioedRes = await getRatioed(
+    JSON.parse(JSON.stringify(getMostDiscussedTweets(tweets)))
+  );
+  const ratioed = ratioedRes.map((t) => {
+    delete t._id;
+    return t;
+  });
+  console.log('typeof result', typeof ratioed);
+
+  const trends = tweets.map((r) => ({
     name: r.name,
     trendScore: r.trendScore,
   }));
   return {
-    props: { tweets:JSON.parse(JSON.stringify(tweets)), trends },
+    props: { tweets, trends, mostDiscussedTweets, ratioedTweets: ratioed },
     revalidate: 15 * 60,
   };
 }

@@ -2,22 +2,31 @@ import { AppBar, Toolbar } from '@mui/material';
 import React from 'react';
 import WhatshotIcon from '@mui/icons-material/Whatshot';
 import Image from 'next/image';
-const Navbar = ({ setIsDrawerOpen, trendMode, setTrendMode }) => {
-  console.log('TRENDMODE', trendMode);
+const Navbar = ({ setIsDrawerOpen, displayMode, setDisplayMode }) => {
+  console.log('displayMode', displayMode);
   return (
-    <AppBar position='sticky' width='100%' color='secondary'>
+    <AppBar position='sticky' width='100%' color='primary'>
       <Toolbar sx={{ display: 'flex', justifyContent: 'space-between' }}>
-        <p>twitterflame</p>
-        {/* <p style={{borderBottom:trendMode && '2px solid white'}} >tweets</p>
-           <p style={{borderBottom:`${!trendMode && '2px solid white'} `}}>trends</p> */}
-      
+        {/* <p style={{borderBottom:displayMode && '2px solid white'}} >tweets</p>
+           <p style={{borderBottom:`${!displayMode && '2px solid white'} `}}>trends</p> */}
         <a
           onClick={(e) => {
             e.preventDefault();
             console.log('CLIIIICKHANDLEEER');
-            setTrendMode(false);
+            setDisplayMode('ratioed');
           }}
-          style={{ borderBottom: !trendMode && '2px solid white' }}
+          style={{ borderBottom: displayMode === 'ratioed' && '2px solid white' }}
+        >
+          ratioed
+        </a>
+
+        <a
+          onClick={(e) => {
+            e.preventDefault();
+            console.log('CLIIIICKHANDLEEER');
+            setDisplayMode('mostDiscussed');
+          }}
+          style={{ borderBottom: displayMode === 'mostDiscussed' && '2px solid white' }}
         >
           tweets
         </a>
@@ -25,9 +34,9 @@ const Navbar = ({ setIsDrawerOpen, trendMode, setTrendMode }) => {
           onClick={(e) => {
             e.preventDefault();
             console.log('CLIIIICKHANDLEEER');
-            setTrendMode(true);
+            setDisplayMode('trends');
           }}
-          style={{ borderBottom: trendMode && '2px solid white' }}
+          style={{ borderBottom: displayMode=== 'trends' && '2px solid white' }}
         >
           trends
         </a>
