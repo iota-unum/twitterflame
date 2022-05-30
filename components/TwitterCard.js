@@ -3,14 +3,18 @@ import { formatDate } from '../libs/utiliities';
 import Link from 'next/link';
 import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, Stack } from '@mui/material';
-import Image from 'next/image'
+import Image from 'next/image';
 import { Box } from '@mui/system';
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 // import { BsTwitter } from 'react-icons/bs';
 // import format from 'date-fns/format'
 
-const TwitterCard = ({ tweet, trendMode, setTrendMode, setSelectedTrend }) => {
-
+const TwitterCard = ({
+  tweet,
+  displayMode,
+  setDisplayMode,
+  setSelectedTrend,
+}) => {
   const {
     created_at,
     id_str,
@@ -19,19 +23,19 @@ const TwitterCard = ({ tweet, trendMode, setTrendMode, setSelectedTrend }) => {
     screen_name,
     profile_image_url_https: profile_image_url,
   } = tweet;
-  const ratio = (tweet.metrics.reply_count + tweet.metrics.quote_count) / tweet.metrics.favorite_count
+  const ratio =
+    (tweet.metrics.reply_count + tweet.metrics.quote_count) /
+    tweet.metrics.favorite_count;
   const status = text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '');
   const tweetImage = tweet.extended_entities?.media[0].media_url_https;
-  const imgWidth = tweet.extended_entities?.media[0].sizes.small.w
-  const imgHeight = tweet.extended_entities?.media[0].sizes.small.h
+  const imgWidth = tweet.extended_entities?.media[0].sizes.small.w;
+  const imgHeight = tweet.extended_entities?.media[0].sizes.small.h;
   const tweetUrl = `https://twitter.com/${screen_name}/status/${tweet.id_str}`;
   //   console.log(id_str, screen_name)
   // console.log(formatDate(created_at));
-  function handleClick(){
-
-    setTrendMode(true)
-    setSelectedTrend(tweet.query.name)
-
+  function handleClick() {
+    setDisplayMode('trends');
+    setSelectedTrend(tweet.query.name);
   }
   return (
     <div className='twitter-card'>
@@ -62,35 +66,34 @@ const TwitterCard = ({ tweet, trendMode, setTrendMode, setSelectedTrend }) => {
       </div>
 
       <div className='card-text'> {status} </div>
-     
-      <div className='card-image'  >
-        {
 
-tweetImage &&  <Image width={imgWidth}  height={imgHeight} src={tweetImage} />
-
-        }
+      <div className='card-image'>
+        {tweetImage && (
+          <Image width={imgWidth} height={imgHeight} src={tweetImage} />
+        )}
         {/* <img src={tweetImage} alt="" /> */}
       </div>
 
       <div className='card-footer'>
         <Stack direction='row' justifyContent='space-between'>
           <div className='date'>{formatDate(created_at)}</div>
-        <Stack direction='row' spacing={2} color="secondary">
-          <span> {tweet.metrics.reply_count} </span>
-          <span> {tweet.metrics.retweet_count} </span>
-          <span> {tweet.metrics.favorite_count} </span>
+          <Stack direction='row' spacing={2} color='secondary'>
+            <span> {tweet.metrics.reply_count} </span>
+            <span> {tweet.metrics.retweet_count} </span>
+            <span> {tweet.metrics.favorite_count} </span>
           </Stack>
-
         </Stack>
-        {!trendMode && 
-        <Box p={2}>
-
-        <small  >
-View more on this trend  <Button variant="outlined"size='small' onClick={handleClick} > {tweet.query.name}</Button>
-        </small>
-
-        </Box>
-}
+        {displayMode === 'mostDiscussed' && (
+          <Box p={2}>
+            <small>
+              View more on this trend{' '}
+              <Button variant='outlined' size='small' onClick={handleClick}>
+                {' '}
+                {tweet.query.name}
+              </Button>
+            </small>
+          </Box>
+        )}
       </div>
       <style jsx>
         {`
@@ -109,8 +112,7 @@ View more on this trend  <Button variant="outlined"size='small' onClick={handleC
             font-family: Arial, Helvetica, sans-serif;
             text-align: left;
             font-size: 1rem;
-            width:100%;
-
+            width: 100%;
           }
 
           .card-header {

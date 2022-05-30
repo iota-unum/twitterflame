@@ -1,32 +1,34 @@
-import { List, ListItem, ListItemButton, ListItemText } from '@mui/material'
-import React from 'react'
+import { List, ListItem, ListItemButton, ListItemText } from '@mui/material';
+import React from 'react';
 
-const TrendList = ({trends, setOpen, setSelectedTrend, selectedTrend, setTrendMode}) => {
-
-    // console.log('TRENDS from trendlist', trends)
-    function handleClick(trend){
-        setOpen(false)
-        setTrendMode(true)
-        setSelectedTrend(trend)
-    }
+const TrendList = ({
+  trends,
+  setOpen,
+  setSelectedTrend,
+  selectedTrend,
+  setDisplayMode,
+}) => {
+  // console.log('TRENDS from trendlist', trends)
+  function handleClick(trend) {
+    setOpen(false);
+    setDisplayMode('trends');
+    setSelectedTrend(trend);
+  }
   return (
-    <List  >
-        {trends.map(trend => 
-            
-            
-    <ListItem disablePadding key={trend.name}>
-      <ListItemButton
-      onClick={()=>handleClick(trend.name)}
-      >
-     
-        <ListItemText primary={trend.name} secondary={trend.trendScore} sx={{color: trend.name === selectedTrend && 'blue'}} />
-      </ListItemButton>
-    </ListItem>
-            
-            
-            )}
+    <List>
+      {trends.map((trend) => (
+        <ListItem disablePadding key={trend.name}>
+          <ListItemButton onClick={() => handleClick(trend.name)}>
+            <ListItemText
+              primary={trend.name}
+              secondary={trend.trendScore}
+              sx={{ color: trend.name === selectedTrend && 'blue' }}
+            />
+          </ListItemButton>
+        </ListItem>
+      ))}
     </List>
-  )
-}
+  );
+};
 
-export default TrendList
+export default TrendList;

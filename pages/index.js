@@ -25,23 +25,23 @@ export default function Home({
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedTrend, setSelectedTrend] = useState(tweets[0].name);
-  const [trendMode, setTrendMode] = useState(false);
+  const [displayMode, setDisplayMode] = useState('ratioed');
   const selectedTweets = tweets.filter(
     (trend) => trend.name === selectedTrend
   )[0].tweets;
   // console.log('SELECTED', selectedTweets);
-  const displayedTweets = trendMode ? selectedTweets : ratioedTweets;
+  const displayedTweets = displayMode === 'mostDiscussed' ? selectedTweets : displayMode === 'trends' ? selectedTweets : ratioedTweets;
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
-  }, [selectedTrend, trendMode]);
+  }, [selectedTrend, displayMode]);
 
   return (
     <CssBaseline>
       <Box width='100vw'>
         <Navbar
           setIsDrawerOpen={setIsDrawerOpen}
-          trendMode={trendMode}
-          setTrendMode={setTrendMode}
+          displayMode={displayMode}
+          setDisplayMode={setDisplayMode}
         ></Navbar>
         <Stack
           direction='row'
@@ -49,8 +49,8 @@ export default function Home({
         >
           <TweetLine
             tweets={displayedTweets}
-            trendMode={trendMode}
-            setTrendMode={setTrendMode}
+            displayMode={displayMode}
+            setDisplayMode={setDisplayMode}
             setSelectedTrend={setSelectedTrend}
           />
 
@@ -60,7 +60,7 @@ export default function Home({
               setOpen={setIsDrawerOpen}
               setSelectedTrend={setSelectedTrend}
               selectedTrend={selectedTrend}
-              setTrendMode={setTrendMode}
+              setDisplayMode={setDisplayMode}
             />
           </Sidebar>
         </Stack>
@@ -70,7 +70,7 @@ export default function Home({
             setOpen={setIsDrawerOpen}
             setSelectedTrend={setSelectedTrend}
             selectedTrend={selectedTrend}
-            setTrendMode={setTrendMode}
+            setDisplayMode={setDisplayMode}
           />
         </AppDrawer>
       </Box>
