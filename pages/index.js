@@ -18,10 +18,10 @@ import { getMostDiscussedTweets } from '../requests/getMostDiscussedTweets';
 
 export default function Home({ tweets, trends }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const [selectedTrend, setSelectedTrend] = useState(tweets.results[0].name);
+  const [selectedTrend, setSelectedTrend] = useState(tweets[0].name);
   const [trendMode, setTrendMode] = useState(false);
-  const mostDiscussedTweets = getMostDiscussedTweets(JSON.parse(JSON.stringify(tweets.results)));
-  const selectedTweets = JSON.parse(JSON.stringify(tweets)).results.filter(
+  const mostDiscussedTweets = getMostDiscussedTweets(JSON.parse(JSON.stringify(tweets)));
+  const selectedTweets = tweets.filter(
     (trend) => trend.name === selectedTrend
   )[0].tweets;
   // console.log('SELECTED', selectedTweets);
@@ -73,14 +73,15 @@ export async function getStaticProps() {
   // const tweetsResponse = await fetch('http://localhost:3000/api/all');
   // const tweets = await tweetsResponse.json();
   // const tweets = tweetsJson.results[0].tweets;
-  const tweets = await getAll();
+  const tweets = await (await getAll()).results;
+  // const tweets = await tweetsRes.results
   
-  const trends = tweets.results.map((r) => ({
+  const trends = tweets.map((r) => ({
     name: r.name,
     trendScore: r.trendScore,
   }));
   return {
-    props: { tweets:JSON.parse(JSON.stringify(tweets)), trends },
+    props: { tweets, trends },
     revalidate: 15 * 60,
   };
 }

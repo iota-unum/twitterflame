@@ -1,27 +1,18 @@
 
-import {MongoClient} from 'mongodb'
 import {exampleTweet} from '../../exampleTweet'
+import { getAll } from '../../requests/getAll';
+import { getMostDiscussedTweets } from '../../requests/getMostDiscussedTweets'
+import { getRatioedCollection, pushRatioed } from '../../requests/getRatioedCollection'
 async function handler(req, res) {
+    const tweets = await (await getAll()).results;
 
-try {
+const mostDiscussed = await getMostDiscussedTweets(tweets)
+const ratioed = mostDiscussed.filter(t => t.ratio > 1)
+await pushRatioed(ratioed)
+const result = await getRatioedCollection()
 
-    const client = await MongoClient.connect(process.env.MONGODB_CONNECTION_STRING)
-    console.log('Connected!')
-    const db = client.db()
-    
-    const ratioedCollection = db.collection('ratioed')
-    console.log(ratioedCollection)
-    // const result = await ratioedCollection.insertOne(exampleTweet)
-    const result = await ratioedCollection.find().toArray()
-    client.close()
-       res.status(200).json(result)
+    res.status(200).json(result)
 
-
-    
-} catch (error) {
-    console.log('error cazzo bastardi', error)
-    res.send(error)
-}
 
 
 }
