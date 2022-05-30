@@ -1,5 +1,5 @@
 export function getMostDiscussedTweets(bulk) {
-  const tweets = JSON.parse(JSON.stringify(bulk))
+  const tweets = bulk
   const mostDiscussed = tweets
     .map((trend) =>
       [...trend.tweets].filter((t) => {
@@ -23,7 +23,7 @@ export function getMostDiscussedTweets(bulk) {
       return { ...t, ratio };
     })
     .sort((a, b) =>  b.ratio - a.ratio || (b.metrics.reply_count + b.metrics.quote_count) - (a.metrics.reply_count + a.metrics.quote_count) )
-console.log('MOSTDISCUSSED', mostDiscussed)
+// console.log('MOSTDISCUSSED', mostDiscussed)
   return removeDuplicates(mostDiscussed);
 }
 
