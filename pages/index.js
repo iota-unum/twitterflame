@@ -25,7 +25,7 @@ export default function Home({
 }) {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const [selectedTrend, setSelectedTrend] = useState(tweets[0].name);
-  const [displayMode, setDisplayMode] = useState('ratioed');
+  const [displayMode, setDisplayMode] = useState('mostDiscussed');
   const selectedTweets = tweets.filter(
     (trend) => trend.name === selectedTrend
   )[0].tweets;
