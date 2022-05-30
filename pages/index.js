@@ -30,7 +30,7 @@ export default function Home({
     (trend) => trend.name === selectedTrend
   )[0].tweets;
   // console.log('SELECTED', selectedTweets);
-  const displayedTweets = displayMode === 'mostDiscussed' ? selectedTweets : displayMode === 'trends' ? selectedTweets : ratioedTweets;
+  const displayedTweets = displayMode === 'mostDiscussed' ? mostDiscussedTweets : displayMode === 'trends' ? selectedTweets : ratioedTweets;
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }, [selectedTrend, displayMode]);
