@@ -22,7 +22,7 @@ export function getMostDiscussedTweets(bulk) {
 
       return { ...t, ratio };
     })
-    .sort((a, b) =>  b.ratio - a.ratio || (b.metrics.reply_count + b.metrics.quote_count) - (a.metrics.reply_count + a.metrics.quote_count) )
+    .sort((a, b) =>  (b.metrics.reply_count + b.metrics.quote_count) - (a.metrics.reply_count + a.metrics.quote_count) )
 // console.log('MOSTDISCUSSED', mostDiscussed)
   return removeDuplicates(mostDiscussed);
 }
