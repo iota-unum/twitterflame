@@ -5,7 +5,6 @@ import TwitterIcon from '@mui/icons-material/Twitter';
 import { Button, Stack } from '@mui/material';
 import Image from 'next/image';
 import { Box } from '@mui/system';
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
 // import { BsTwitter } from 'react-icons/bs';
 // import format from 'date-fns/format'
 
@@ -100,7 +99,6 @@ const TwitterCard = ({
           .twitter-card {
             border: ${ratio > 1 && `5px solid purple`};
             border-radius: 0.8em;
-            width: 95%;
             display: flex;
             flex-direction: column;
             background-color: white;
@@ -112,7 +110,7 @@ const TwitterCard = ({
             font-family: Arial, Helvetica, sans-serif;
             text-align: left;
             font-size: 1rem;
-            width: 100%;
+            width: 90%;
           }
 
           .card-header {

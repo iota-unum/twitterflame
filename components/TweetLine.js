@@ -1,7 +1,6 @@
 import { Stack } from '@mui/material';
 import { Box } from '@mui/system';
 import React from 'react';
-import { TwitterTweetEmbed } from 'react-twitter-embed';
 import TwitterCard from './TwitterCard';
 
 const TweetLine = ({

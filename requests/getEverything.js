@@ -23,3 +23,12 @@ export async function getEverything() {
     (a, b) => b.trendScore - a.trendScore
   );
 }
+
+
+async function getAllTwits(trends) {
+for(const trend of trends) {
+  
+}
+
+
+}
