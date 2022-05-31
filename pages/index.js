@@ -83,8 +83,8 @@ export async function getStaticProps() {
   const ratioed = ratioedRes.map((t) => {
     delete t._id;
     return t;
-  });
-  console.log('typeof result', typeof ratioed);
+  }).sort((a,b)=> b.ratio - a.ratio)
+  .filter(t => t.metrics.reply_count > 30)
 
   const trends = tweets.map((r) => ({
     name: r.name,
