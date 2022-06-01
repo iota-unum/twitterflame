@@ -83,9 +83,9 @@ export async function getStaticProps() {
   const ratioed = ratioedRes.map((t) => {
     delete t._id;
     return t;
-  }).sort((a,b)=> b.ratio - a.ratio)
-  .filter(t => t.metrics.reply_count + t.metrics.quote_count > 50)
-
+  })
+  .filter(t => (t.metrics.reply_count + t.metrics.quote_count) > 50)
+  .sort((a,b)=> b.timestamp - a.timestamp)
   const trends = tweets.map((r) => ({
     name: r.name,
     trendScore: r.trendScore,

@@ -59,12 +59,40 @@ export function getIdsStringFromTweetsArray(tweets) {
 export function formatDate(date) {
   const TWITTER_DATE_FORMAT = 'EEE MMM d HH:mm:ss ZZZ yyyy';
 
-  const parseTwitterDate = (dateStr) =>
-    DateTime.fromFormat(dateStr, TWITTER_DATE_FORMAT);
+ 
 
   const formatTwitterDate = (dateTime) =>
     dateTime.toFormat(TWITTER_DATE_FORMAT);
+    const parseTwitterDate = (dateStr) =>
+    DateTime.fromFormat(dateStr, TWITTER_DATE_FORMAT);
 
 return  parseTwitterDate(date).toFormat('hh:mm a dd LLL yyyy', {locale:'it'});
  
+}
+
+export function getJSDate(created_at){
+
+  const TWITTER_DATE_FORMAT = 'EEE MMM d HH:mm:ss ZZZ yyyy';
+
+  const parseTwitterDate = (dateStr) =>
+  DateTime.fromFormat(dateStr, TWITTER_DATE_FORMAT);
+  const luxonDate =  parseTwitterDate(created_at)
+  const jsDate = luxonDate.toJSDate()
+  return jsDate
+
+
+
+}
+export function getTimestamp(created_at){
+
+  const TWITTER_DATE_FORMAT = 'EEE MMM d HH:mm:ss ZZZ yyyy';
+
+  const parseTwitterDate = (dateStr) =>
+  DateTime.fromFormat(dateStr, TWITTER_DATE_FORMAT);
+  const luxonDate =  parseTwitterDate(created_at)
+  const timestamp = luxonDate.ts
+  return timestamp
+
+
+
 }

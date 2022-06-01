@@ -1,4 +1,5 @@
 import TwitterApi from 'twitter-api-v2';
+import { getJSDate, getTimestamp } from '../libs/utiliities';
 const client = new TwitterApi(process.env.TWITTER_BEARER_TOKEN);
 
 
@@ -20,7 +21,8 @@ const extended_entities = off.extended_entities || null
 const {name, screen_name, profile_image_url_https} = user
 const {full_text, reply_count, retweet_count, favorite_count, quote_count, created_at, } = unofficial[id_str] 
 const tweetScore = reply_count + quote_count
-  return {id_str, created_at, name, screen_name, profile_image_url_https, full_text, tweetScore, metrics:{retweet_count, favorite_count, quote_count, reply_count},extended_entities} 
+const timestamp = getTimestamp(created_at)
+  return {id_str, created_at, name, screen_name, profile_image_url_https, full_text, tweetScore, metrics:{retweet_count, favorite_count, quote_count, reply_count},extended_entities, timestamp} 
 })
 
 return mergedTweets
