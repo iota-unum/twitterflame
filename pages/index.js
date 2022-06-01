@@ -84,7 +84,7 @@ export async function getStaticProps() {
     delete t._id;
     return t;
   }).sort((a,b)=> b.ratio - a.ratio)
-  .filter(t => t.metrics.reply_count > 30)
+  .filter(t => t.metrics.reply_count + t.metrics.quote_count > 50)
 
   const trends = tweets.map((r) => ({
     name: r.name,
