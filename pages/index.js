@@ -12,6 +12,7 @@ import AppDrawer from '../components/AppDrawer';
 import { getAll } from '../requests/getAll';
 import { getMostDiscussedTweets } from '../requests/getMostDiscussedTweets';
 import { getRatioed } from '../requests/getRatioedCollection';
+import { Sort } from '@mui/icons-material';
 
 export default function Home({
   tweets,
@@ -78,20 +79,24 @@ export async function getStaticProps() {
   const tweets = await (await getAll()).results;
   const mostDiscussedTweets = await getMostDiscussedTweets(tweets);
   const ratioedRes = await getRatioed(
-    JSON.parse(JSON.stringify(getMostDiscussedTweets(tweets)))
+    // JSON.parse(JSON.stringify(getMostDiscussedTweets(tweets)))
+    mostDiscussedTweets
   );
   const ratioed = ratioedRes.map((t) => {
     delete t._id;
     return t;
   })
   .filter(t => (t.metrics.reply_count + t.metrics.quote_count) > 50)
-  .sort((a,b)=> b.timestamp - a.timestamp)
+
+  const ratioedTweets  = JSON.parse(JSON.stringify(ratioed))  .sort((a,b)=> b.id_str - a.id_str)
+
+  
   const trends = tweets.map((r) => ({
     name: r.name,
     trendScore: r.trendScore,
   }));
   return {
-    props: { tweets, trends, mostDiscussedTweets, ratioedTweets: ratioed },
+    props: {tweets: JSON.parse(JSON.stringify(tweets)), trends, mostDiscussedTweets, ratioedTweets },
     revalidate: 15 * 60,
   };
 }

@@ -1,3 +1,57 @@
+import { getAll } from "../../requests/getAll"
+import { getRatioed } from "../../requests/getRatioedCollection"
+
+async function handler(req, res) {
+
+  try {
+
+
+    const response = await getAll()
+    const tweets = response.results
+    const result = await getRatioed(tweets)
+      res.status(200).json(result)
+      
+  } catch (error) {
+      console.log('ERROREEEE', error )
+      
+  }
+
+
+}
+
+export default handler
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // import {exampleTweet} from '../../exampleTweet'
 // import { getAll } from '../../requests/getAll';

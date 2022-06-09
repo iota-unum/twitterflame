@@ -17,9 +17,11 @@ try {
   // await ratioedCollection.insertMany(ratioed)
 
   // await ratioedCollection.updateOne({id_str:t.id_str}, {$set:{...t}} , {upsert:true})
-console.log('RATIOED', ratioed)
+// console.log('RATIOED', ratioed)
 const result = await updateRatioed(ratioed, ratioedCollection)
 
+console.log('RESULT from MongoDB', result)
+client.close()
   return result
 
 } catch (error) {
@@ -30,10 +32,16 @@ const result = await updateRatioed(ratioed, ratioedCollection)
 
 
 async function updateRatioed(ratioed, ratioedCollection){
-
-  for (const tweet of ratioed) {
-    await ratioedCollection.updateOne({id_str:tweet.id_str}, {$set:{...tweet}} , {upsert:true})
+  try {
+    for (const tweet of ratioed) {
+      await ratioedCollection.updateOne({id_str:tweet.id_str}, {$set:{...tweet}} , {upsert:true})
+    }
+    const result = await ratioedCollection.find().toArray();
+  return result
+    
+  } catch (error) {
+    console.log('Error updating', error)
+    
   }
-  const result = await ratioedCollection.find().toArray();
-return result
+
 }
