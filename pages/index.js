@@ -84,7 +84,7 @@ export async function getStaticProps() {
   );
   const ratioed = ratioedRes.map((t) => {
     delete t._id;
-    return t;
+    return t
   })
   .filter(t => (t.metrics.reply_count + t.metrics.quote_count) > 50)
 
